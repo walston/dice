@@ -1,31 +1,19 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-
-type RollString = string;
-type Roll = { name: string; roll: RollString };
-
-const ROLLS: Roll[] = [
-  {
-    name: "Longsword (one-handed)",
-    roll: "(1d20;n=20:CRIT,n=1:FAIL)|(slashing,1d10)(CRIT?slashing,1d10)",
-  },
-  {
-    name: "Longsword (two-handed)",
-    roll: "(1d20;n=20:CRIT,n=1:FAIL)|(slashing,1d8)(CRIT?slashing,1d8)",
-  },
-];
+import { loadCharacter } from "./characterService";
 
 function CaddieApp() {
+  const { name, rolls } = loadCharacter();
   return (
     <aside>
-      <h1>Onthrop</h1>
-      {ROLLS.map(({ name, roll }) => (
+      <h1>{name}</h1>
+      {rolls.map(({ title, script }) => (
         <div
-          onClick={() => console.log("rolling", name)}
+          onClick={() => console.log("rolling", title)}
           style={{ cursor: "pointer" }}
         >
-          <h2>{name}</h2>
-          <pre contentEditable>{roll}</pre>
+          <h2>{title}</h2>
+          <pre contentEditable>{script}</pre>
         </div>
       ))}
     </aside>
