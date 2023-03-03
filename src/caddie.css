@@ -1,4 +1,17 @@
-.inherit {
+:root {
+  width: 20em;
+  background-color: hsla(0 0% 80% 0.2);
+  border: 1px solid hsl(0 0% 80%);
+  border-radius: .5em;
+  margin: 1em;
+  height: calc(100% - 1em * 2);
+}
+
+input::placeholder {
+  color: hsl(260 10% 75%);
+}
+
+.inheritor {
   border: none;
   text-align: inherit;
   font-size: inherit;
@@ -7,8 +20,9 @@
   margin: 0;
   padding: 0;
   width: 100%;
+  height: inherit;
 }
 
-.inherit:focus {
+.inheritor:focus {
   border: initial;
 }
