@@ -1,5 +1,4 @@
 import React from "react";
-import { Roll } from "./characterService";
 
 type RollProps = {
   script: string;
@@ -22,7 +21,6 @@ export function Roll({
         <input
           type="text"
           className="inheritor active"
-          style={{ boxShadow: "inset 2px 2px 3px darkgray" }}
           placeholder="Ball of Fire"
           value={title}
           onChange={(event) => renameRoll(event.target.value)}
@@ -32,7 +30,6 @@ export function Roll({
         <input
           type="text"
           className="inheritor active"
-          style={{ boxShadow: "inset 2px 2px 3px darkgray" }}
           placeholder="8d6"
           value={script}
           onChange={(event) => changeRoll(event.target.value)}
