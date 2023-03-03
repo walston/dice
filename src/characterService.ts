@@ -53,7 +53,7 @@ const reducer: CharacterReducer = (state, { type, payload }) => {
       character = { ...state, rolls };
       return character;
     default:
-      const never: never = payload
+      // const never: never = payload
       return state;
   }
 }
