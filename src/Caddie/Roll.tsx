@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { validate } from "../services/rollService";
 
 type RollProps = {
   script: string;
@@ -15,6 +16,7 @@ export function Roll({
   changeRoll,
   renameRoll,
 }: RollProps): JSX.Element {
+  const valid = useMemo(() => validate(script), [script]);
   return (
     <div onClick={() => roll()} style={{ cursor: "pointer" }}>
       <h2>
@@ -26,7 +28,16 @@ export function Roll({
           onChange={(event) => renameRoll(event.target.value)}
         />
       </h2>
-      <pre>
+      <pre
+        style={
+          valid
+            ? { border: "1px solid transparent" }
+            : {
+                backgroundColor: "lightcoral",
+                border: "1px solid red",
+              }
+        }
+      >
         <input
           type="text"
           className="inheritor active"
