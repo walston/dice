@@ -2,7 +2,7 @@ import React from "react";
 import { useCharacter } from "../services/characterService";
 import { roll } from "../services/rollService";
 import { Roll } from "./Roll";
-import "./caddie.css";
+import "./App.css";
 
 export function App() {
   const [{ name, rolls }, dispatchers] = useCharacter();
