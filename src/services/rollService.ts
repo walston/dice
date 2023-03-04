@@ -4,7 +4,7 @@ import TROLL_GRAMMAR from './troll.peggy?raw'
 let languageParser: peg.Parser;
 
 try {
-  languageParser = peg.generate(TROLL_GRAMMAR);
+  languageParser = peg.generate(TROLL_GRAMMAR, { trace: true });
 } catch (e) {
   console.error(e);
 }
@@ -15,5 +15,15 @@ export function roll(script: string) {
     console.log(ast)
   } catch (e) {
     console.log(e)
+  }
+}
+
+export function validate(script: string) {
+  try {
+    languageParser.parse(script);
+    return true;
+  } catch (e) {
+    console.log(e)
+    return false;
   }
 }
