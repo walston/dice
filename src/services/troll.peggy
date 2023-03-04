@@ -1,25 +1,56 @@
+start
+  = command
+
 _ "optional whitespace"
   = [ \t]*
+
+__ "required whitespace"
+  = [ \t]+
 
 number "number"
   = digits:[0-9]+
   { return parseInt(digits.join(""), 10); }
 
-additive
-  = left:number _ [+-] _ right:number
-  = left:set _ [+-] _ right:number
+die "die"
+  = [dD] sides:number
   { return {
-    type: "add",
-    left: left,
-    right: right,
-  }}
+    type: "die",
+    sides,
+  }; }
+  / [zZ] sides:number
+  { return {
+    type: "zero-based die",
+    sides,
+  }; }
 
-set "set of dice"
-  = count:number? [dD] d:number
+multiset "set of dice"
+  = count:number? dice:die
   { return {
     type: "set",
     count: count || 1,
-    d,
-    modifier: modifier || 0,
-    damage_type: damage_type.join(""),
-  } }
+    dice,
+  }; }
+
+////////////////////////////////////////
+// COMMANDS
+////////////////////////////////////////
+
+command
+  = sum
+  / largest
+
+sum
+  = "sum" __ multiset:multiset _ modifier:([+-] _ number)?
+  { return {
+    type: "sum",
+    multiset,
+    modifier: modifier ? parseInt(modifier.join(""), 10) : 0
+  }; }
+
+largest
+  = "largest" __ counter:number __ multiset:multiset
+  { return {
+    type: "largest",
+    counter,
+    multiset,
+  }; }

@@ -59,8 +59,8 @@ const reducer: CharacterReducer = (state, { type, payload }) => {
 }
 
 const defaultCharacter = characterFactory('Onthrop');
-defaultCharacter.rolls.push(rollFactory({ title: 'Longsword', script: 'd8+5' }))
-defaultCharacter.rolls.push(rollFactory({ title: 'Longsword (two-handed)', script: 'd10+5' }))
+defaultCharacter.rolls.push(rollFactory({ title: 'Longsword', script: 'sum d8+5' }))
+defaultCharacter.rolls.push(rollFactory({ title: 'Longsword (two-handed)', script: 'sum d10+5' }))
 
 export function useCharacter() {
   const [character, dispatch] = useReducer(reducer, defaultCharacter);
