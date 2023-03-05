@@ -22,7 +22,7 @@ export function App() {
           key={guid}
           script={script}
           title={title}
-          roll={() => roll(script)}
+          roll={async () => console.log(await roll(script))}
           changeRoll={(roll) => dispatchers.changeRoll(guid, roll)}
           renameRoll={(name) => dispatchers.renameRoll(guid, name)}
         />

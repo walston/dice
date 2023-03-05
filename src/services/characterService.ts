@@ -59,6 +59,7 @@ const reducer: CharacterReducer = (state, { type, payload }) => {
 }
 
 const defaultCharacter = characterFactory('Onthrop');
+defaultCharacter.rolls.push(rollFactory({ title: 'Stat', script: 'largest 3 4d6' }))
 defaultCharacter.rolls.push(rollFactory({ title: 'Longsword', script: 'sum d8+5' }))
 defaultCharacter.rolls.push(rollFactory({ title: 'Longsword (two-handed)', script: 'sum d10+5' }))
 
@@ -99,6 +100,7 @@ function characterFactory(name?: string): Character {
 }
 
 function rollFactory(roll: Partial<Omit<Roll, 'guid'>>): Roll {
+  console.log('roll factory')
   const guid = v4();
   const title = roll.title || '';
   const script = roll.script || '';

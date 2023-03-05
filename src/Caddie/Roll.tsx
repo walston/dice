@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { validate } from "../services/rollService";
+import React, { useMemo, useState } from "react";
+import { validate } from "../services/languageService";
 
 type RollProps = {
   script: string;
@@ -16,17 +16,22 @@ export function Roll({
   changeRoll,
   renameRoll,
 }: RollProps): JSX.Element {
+  const editing = useState(false);
   const valid = useMemo(() => validate(script), [script]);
   return (
     <div onClick={() => roll()} style={{ cursor: "pointer" }}>
       <h2>
-        <input
-          type="text"
-          className="inheritor active"
-          placeholder="Ball of Fire"
-          value={title}
-          onChange={(event) => renameRoll(event.target.value)}
-        />
+        {editing ? (
+          <input
+            type="text"
+            className="inheritor active"
+            placeholder="Ball of Fire"
+            value={title}
+            onChange={(event) => renameRoll(event.target.value)}
+          />
+        ) : (
+          title
+        )}
       </h2>
       <pre
         style={
@@ -38,13 +43,17 @@ export function Roll({
               }
         }
       >
-        <input
-          type="text"
-          className="inheritor active"
-          placeholder="8d6"
-          value={script}
-          onChange={(event) => changeRoll(event.target.value)}
-        />
+        {editing ? (
+          <input
+            type="text"
+            className="inheritor active"
+            placeholder="8d6"
+            value={script}
+            onChange={(event) => changeRoll(event.target.value)}
+          />
+        ) : (
+          script
+        )}
       </pre>
     </div>
   );
